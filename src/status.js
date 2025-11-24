@@ -39,8 +39,7 @@ export default class Status extends Component {
     debounced: false
   }
 
-  /* eslint-disable react/no-deprecated -- https://github.com/alphagov/accessible-autocomplete/issues/418 */
-  componentWillMount () {
+  componentDidMount () {
     const that = this
     this.debounceStatusUpdate = debounce(function () {
       if (!that.state.debounced) {
@@ -55,9 +54,12 @@ export default class Status extends Component {
     }, statusDebounceMillis)
   }
 
-  /* eslint-disable react/no-deprecated -- https://github.com/alphagov/accessible-autocomplete/issues/418 */
-  UNSAFE_componentWillReceiveProps ({ queryLength }) {
-    this.setState({ debounced: false })
+  componentDidUpdate (prevProps) {
+    const queryLengthChanged = prevProps.queryLength !== this.props.queryLength
+    if (queryLengthChanged) {
+      this.setState({ debounced: false })
+      this.debounceStatusUpdate?.()
+    }
   }
 
   render () {
@@ -92,7 +94,9 @@ export default class Status extends Component {
       content = tResults(length, contentSelectedOption)
     }
 
-    this.debounceStatusUpdate()
+    if (this.debounceStatusUpdate) {
+      this.debounceStatusUpdate()
+    }
 
     return (
       <div

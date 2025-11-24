@@ -117,7 +117,7 @@ export default class Autocomplete extends Component {
     )
   }
 
-  UNSAFE_componentDidMount () {
+  componentDidMount () {
     this.pollInputElement()
   }
 

@@ -748,7 +748,7 @@ describe('Status', () => {
             validChoiceMade: true,
             isInFocus: true
           })
-          status.componentWillMount()
+          status.componentDidMount()
           status.render()
 
           setTimeout(() => {
@@ -763,7 +763,7 @@ describe('Status', () => {
             validChoiceMade: false,
             isInFocus: false
           })
-          status.componentWillMount()
+          status.componentDidMount()
           status.render()
 
           setTimeout(() => {
@@ -779,7 +779,7 @@ describe('Status', () => {
             validChoiceMade: false,
             isInFocus: true
           })
-          status.componentWillMount()
+          status.componentDidMount()
           status.render()
 
           setTimeout(() => {
